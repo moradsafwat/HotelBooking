@@ -34,5 +34,5 @@ namespace HotelBooking.Infrastructure.Data
     }
 }
 
-   
- 
+
+

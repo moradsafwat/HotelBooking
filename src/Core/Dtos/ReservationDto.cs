@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelBooking.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,17 +15,18 @@ namespace HotelBooking.Core.Dtos
         public string Email { get; set; }
         public int Phone { get; set; }
 
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         public DateTime ArrivalDate { get; set; }
 
-        [DataType(DataType.Time)]
+        //[DataType(DataType.Time)]
         public DateTime ArrivalTime { get; set; }
 
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         public DateTime DepatureDate { get; set; }
 
-        [DataType(DataType.Time)]
+        //[DataType(DataType.Time)]
         public DateTime DepartureTime { get; set; }
         public string NumOfPeople { get; set; }
+        public List<Room> rooms { get; set; }
     }
 }

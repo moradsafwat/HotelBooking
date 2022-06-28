@@ -13,9 +13,11 @@ namespace HotelBooking.Core.Services
     public class ReservationsService : IReservationsService
     {
         private readonly IReservationRepository _reservation;
-        public ReservationsService(IReservationRepository reservation)
+        private readonly IRoomRepository _room;
+        public ReservationsService(IReservationRepository reservation, IRoomRepository room)
         {
             _reservation = reservation;
+            _room = room;
         }
 
         public IEnumerable<Reservation> GetAll()
@@ -60,28 +62,32 @@ namespace HotelBooking.Core.Services
             return dto;
         }
 
-        
+        public ReservationDto CreateReservationRooms(ReservationDto dto)
+        {
+            IList<Room> roomAdd = new List<Room>();
+            var booking = new Reservation
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                ArrivalDate = dto.ArrivalDate,
+                ArrivalTime = dto.ArrivalTime,
+                DepatureDate = dto.DepatureDate,
+                DepartureTime = dto.DepartureTime,
+                NumOfPeople = dto.NumOfPeople,
+            };
+            foreach(var Rooms in dto.rooms)
+            {
+                var getRoom = _room.Find(Rooms.Id);
+                if (getRoom != null)
+                    roomAdd.Add(getRoom); 
+            }
+            booking.Rooms = roomAdd;
+            _reservation.Add(booking);
+            _room.SaveAsync();
 
-
-
-        //public ReservationDto Add(ReservationDto dto)
-        //{
-        //    var reservation = new Reservation
-        //    {
-        //        Id = dto.Id,
-        //        Name = dto.Name,
-        //        Email = dto.Email,
-        //        Phone = dto.Phone,
-        //        ArrivalDate = dto.ArrivalDate,
-        //        ArrivalTime = dto.ArrivalTime,
-        //        DepatureDate = dto.DepatureDate,
-        //        DepartureTime = dto.DepartureTime,
-        //        NumOfPeople = dto.NumOfPeople
-        //    };
-        //    _reservation.Add(reservation);
-
-        //    return dto;
-        //}
-
+            return dto;
+        }
     }
 }

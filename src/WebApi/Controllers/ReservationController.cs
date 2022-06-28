@@ -15,10 +15,12 @@ namespace HotelBooking.WebApi.Controllers
     public class ReservationController : ControllerBase
     {
         private readonly IReservationsService _reservations;
+        private readonly IRoomsService _rooms;
 
-        public ReservationController(IReservationsService reservations)
+        public ReservationController(IReservationsService reservations, IRoomsService rooms)
         {
             _reservations = reservations;
+            _rooms = rooms;
         }
         [HttpGet("GetAll")]
         public IActionResult GetAll()
@@ -35,15 +37,23 @@ namespace HotelBooking.WebApi.Controllers
             return Ok(reservation);
         }
 
-
-        [HttpPost]
-        public IActionResult CreateReservation(ReservationDto dto)
+        [HttpPost("CreateReservation")]
+        public IActionResult CreateReservation([FromBody]ReservationDto dto)
         {
             //var check = _reservations.GetById(dto.BranchId);
             if (dto == null)
                 return NotFound($"Sorry .. NotFound Reservation To Create");
 
             _reservations.Create(dto);
+            return Ok(dto);
+        }
+        [HttpPost("CreateReservationRooms")]
+        public IActionResult CreateReservationRoos(ReservationDto dto)
+        {
+            if (dto == null)
+                return NotFound($"Sorry .. NotFound Reservation To Create");
+
+            _reservations.CreateReservationRooms(dto);
             return Ok(dto);
         }
 
