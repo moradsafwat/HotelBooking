@@ -15,15 +15,28 @@ namespace HotelBooking.Core.Services
         {
             _room = room;
         }
-
+        
         public IEnumerable<Room> GetAll()
         {
             return _room.List();
         }
         
-        public IEnumerable<Room> GetRoomsByBranchId(int branchId)
+        public IEnumerable<RoomDto> GetRoomsByBranchId(int branchId)
         {
-            return _room.GetRoomsByBranchId(branchId);
+            var rooms =  _room.GetRoomsByBranchId(branchId).Select(r => new RoomDto
+            {
+                RoomId = r.Id,
+                RoomName = r.RoomName,
+                RoomType = r.RoomType,
+                Price = r.Price,
+                View = r.View,
+                BranchId = r.BranchId,
+                //BranchName = r.Branch.BranchName
+            }); ;  
+
+            if (rooms != null)
+                return rooms;
+            return null;
         }
         public RoomDto GetById(int id)
         {

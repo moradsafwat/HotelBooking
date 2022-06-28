@@ -24,18 +24,9 @@ namespace HotelBooking.WebApi.Controllers
         }
 
         [HttpGet("GetAllRoom")]
-        public IActionResult GetAllRoom(int branchId)
+        public IActionResult GetAllRoom()
         {
-            var room = _roomsService.GetRoomsByBranchId(branchId).Select(r => new RoomDto
-            {
-                RoomId = r.Id,
-                RoomName = r.RoomName,
-                RoomType = r.RoomType,
-                Price = r.Price,
-                View = r.View,
-                BranchId = r.BranchId ,
-                BranchName = r.Branch.BranchName
-            });
+            var room = _roomsService.GetAll();
             return Ok(room);
         }
 
@@ -51,16 +42,7 @@ namespace HotelBooking.WebApi.Controllers
         [HttpGet("GetRoomsByBranchId")]
         public IActionResult GetRoomsByBranchId(int branchId)
         {
-            var rooms = _roomsService.GetRoomsByBranchId(branchId).Select(r => new RoomDto
-            {
-                RoomId = r.Id,
-                RoomName = r.RoomName,
-                RoomType = r.RoomType,
-                Price = r.Price,
-                View = r.View,
-                BranchId = r.BranchId,
-                BranchName = r.Branch.BranchName
-            });
+            var rooms = _roomsService.GetRoomsByBranchId(branchId);
             if (rooms != null)
                 return Ok(rooms);
 

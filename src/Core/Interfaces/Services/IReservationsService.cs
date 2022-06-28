@@ -12,9 +12,8 @@ namespace HotelBooking.Core.Services
     {
         IEnumerable<Reservation> GetAll();
         ReservationDto Create(ReservationDto dto);
+        ReservationDto GetById(int id);
         
-        
-        //ReservationDto GetById(int id);
         //ReservationDto Add(ReservationDto dto);
         //ReservationDto Delete(ReservationDto dto);
         //ReservationDto Update(ReservationDto dto);

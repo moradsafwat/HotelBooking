@@ -17,21 +17,20 @@ namespace HotelBooking.Infrastructure.Data.Repository
 
         public IEnumerable<Room> GetRoomsByBranchId(int branchId)
         {
-            //var rooms = db.Rooms.Include(i => i.Branch)
-            //   .GroupBy(x => x.RoomType)
-            //   .Select(g => g.OrderBy(x => x.Price)
-            //   .FirstOrDefault());
-
-            var rooms = db.Rooms.Where(m => m.BranchId == branchId)
+            var rooms = db.Rooms.Include(b => b.Branch )
+                .Where(m => m.BranchId == branchId)
+                .AsEnumerable()
+                .GroupBy(x => x.RoomType)
                 .Select(x => new Room
                 {
-                    Id = x.Id,
-                    RoomType = x.RoomType,
-                    BranchId = x.BranchId,
-
-                    x => x.Min(i => i.Price)
-                }).GroupBy(x => x.RoomType).ToList();
-
+                    Id = x.FirstOrDefault().Id,
+                    RoomType = x.FirstOrDefault().RoomType,
+                    BranchId = x.FirstOrDefault().BranchId,
+                    Price = x.Min(i => i.Price)
+                })
+                .ToList();
+            if (rooms == null)
+                return null;
 
             return rooms;
         }

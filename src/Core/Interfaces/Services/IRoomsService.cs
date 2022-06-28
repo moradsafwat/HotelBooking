@@ -10,8 +10,7 @@ namespace HotelBooking.Core.Services
     public interface IRoomsService
     {
         IEnumerable<Room> GetAll();
-        //IEnumerable<Room> GetAllWithBranch();
-        IEnumerable<Room> GetRoomsByBranchId(int branchId);
+        IEnumerable<RoomDto> GetRoomsByBranchId(int branchId);
         RoomDto GetById(int id);
         RoomDto Add(RoomDto roomDto);
         RoomDto Delete(RoomDto roomDto);

@@ -22,6 +22,25 @@ namespace HotelBooking.Core.Services
         {
             return (_reservation.List());
         }
+        public ReservationDto GetById(int id)
+        {
+            var reservation = _reservation.Find(id);
+            var dto = new ReservationDto
+            {
+                Id = reservation.Id,
+                Name = reservation.Name,
+                Email = reservation.Email,
+                Phone =reservation.Phone,
+                NumOfPeople = reservation.NumOfPeople,
+                ArrivalDate =reservation.ArrivalDate,
+                ArrivalTime =reservation.ArrivalTime,
+                DepatureDate = reservation.DepatureDate,
+                DepartureTime =reservation.DepatureDate
+            };
+            if (reservation != null)
+                return dto;
+            return null;
+        }
         public ReservationDto Create(ReservationDto dto)
         {
             var reservation = new Reservation
@@ -42,6 +61,8 @@ namespace HotelBooking.Core.Services
         }
 
         
+
+
 
         //public ReservationDto Add(ReservationDto dto)
         //{

@@ -25,6 +25,27 @@ namespace HotelBooking.WebApi.Controllers
         {
             return Ok(_reservations.GetAll());
         }
+        [HttpGet("GetById")]
+        public IActionResult GetById(int id)
+        {
+            var reservation = _reservations.GetById(id);
+            if (reservation == null)
+                return NotFound($"Sorry ... Not Found Reservation With ID : {id}");
+
+            return Ok(reservation);
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateReservation(ReservationDto dto)
+        {
+            //var check = _reservations.GetById(dto.BranchId);
+            if (dto == null)
+                return NotFound($"Sorry .. NotFound Reservation To Create");
+
+            _reservations.Create(dto);
+            return Ok(dto);
+        }
 
     }   
 }
