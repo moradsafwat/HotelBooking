@@ -22,8 +22,8 @@ namespace HotelBooking.WebApi.Controllers
             _hotelsService = hotelsService;
         }
       
-        [HttpGet("GetAll")]
-        public IActionResult GetAllBanchs()
+        [HttpGet("GetAllBranchs")]
+        public IActionResult GetAllBranchs()
         {
             var branchs = _branchsService.GetWithHotel().Select( b => new BranchDto 
             {
@@ -36,7 +36,7 @@ namespace HotelBooking.WebApi.Controllers
             return Ok(branchs);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {
             var branch = _branchsService.GetById(id);
@@ -44,15 +44,8 @@ namespace HotelBooking.WebApi.Controllers
                 return NotFound($"Sorry .. Not Found Branch With ID : {id}");
             return Ok(branch);
         }
-        //[HttpGet("GetByIdWithRoom")]
-        //public IActionResult GetByIdWithRoom(int id)
-        //{
-        //    var branch = _branchsService.GetById(id);
-        //    if (branch == null)
-        //        return NotFound($"Sorry .. Not Found Branch With ID : {id}");
-        //    return Ok(branch);
-        //}
-        [HttpPost]
+        
+        [HttpPost("CreateBranch")]
         public IActionResult CreateBranch(BranchDto dto)
         {
             var branch = new Branch
@@ -69,7 +62,7 @@ namespace HotelBooking.WebApi.Controllers
             return Ok(dto);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateBranch")]
         public IActionResult UpdateBranch(int id, [FromBody] BranchDto branchDto)
         {
             var branch = _branchsService.GetById(id);
@@ -87,10 +80,10 @@ namespace HotelBooking.WebApi.Controllers
 
             _branchsService.Update(branchDto);
             _branchsService.SaveChange();
-            //_branchsService.Update(dto);
+            
             return Ok(branchDto);
         }
-        [HttpDelete]
+        [HttpDelete("DeleteBranch")]
         public IActionResult DeleteBranch(int id)
         {
             var branch = _branchsService.GetById(id);

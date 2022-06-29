@@ -33,7 +33,8 @@ namespace HotelBooking.Core.Services
         public BranchDto GetById(int id)
         {
             var branch = _branch.Find(id);
-
+            if (branch == null)
+                return null;
             var dto = new BranchDto
             {
                 Id = branch.Id,
@@ -41,6 +42,7 @@ namespace HotelBooking.Core.Services
                 Location = branch.Location,
                 HotelId = branch.HotelId,
             };
+            
             return dto;
         }
         public BranchDto Update(BranchDto dto)

@@ -25,7 +25,6 @@ namespace HotelBooking.Core.Models
         [DataType(DataType.Time)]
         public DateTime DepartureTime { get; set; }
         public string NumOfPeople { get; set; }
-
         public ICollection<Room> Rooms { get; set; }
     }
 }

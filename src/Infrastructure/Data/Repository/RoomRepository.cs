@@ -34,5 +34,20 @@ namespace HotelBooking.Infrastructure.Data.Repository
 
             return rooms;
         }
+        public IEnumerable<Room> GetAvaliableRoomsWithinDatesByBranch(int branchId, DateTime from, DateTime to)
+        {
+            return db.Rooms.Where(r => r.BranchId == branchId)
+                .Select(r => new
+                {
+                    room = r,
+                    avaliable = r.Reservations.Count == 0 ||
+                                r.Reservations
+                                .Any(x => DateTime.Compare(x.DepatureDate, from) <= 0 ||
+                                                        DateTime.Compare(x.ArrivalDate, to) > 0),
+                })
+                .Where(r => r.avaliable)
+                .Select(r => r.room)
+                .ToList();
+        }
     }
 }

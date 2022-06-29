@@ -10,5 +10,6 @@ namespace HotelBooking.Core.Repositories
 {
     public interface IReservationRepository : IRepository<Reservation>
     {
+        IEnumerable<Reservation> GetReservationWithRooms(int reservationId);
     }
 }

@@ -12,10 +12,11 @@ namespace HotelBooking.Core.Services
     {
         IEnumerable<Reservation> GetAll();
         ReservationDto GetById(int id);
+        IEnumerable<ReservationRoomsDto> GetReservationRooms(int reservationId);
+
         ReservationDto Create(ReservationDto dto);
         ReservationDto CreateReservationRooms(ReservationDto dto);
-        //ReservationDto Add(ReservationDto dto);
-        //ReservationDto Delete(ReservationDto dto);
+        ReservationDto Delete(ReservationDto dto);
         //ReservationDto Update(ReservationDto dto);
     }
 }

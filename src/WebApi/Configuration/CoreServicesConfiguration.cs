@@ -1,8 +1,5 @@
-﻿using HotelBooking.Core.Configuration;
-using HotelBookig.Core.Repositories;
+﻿using HotelBookig.Core.Repositories;
 using HotelBooking.Infrastructure.Data.Repository;
-using HotelBooking.Core.Mapping;
-using HotelBooking.Infrastructure.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using HotelBooking.Core.Repositories;
@@ -15,9 +12,6 @@ namespace HotelBooking.WebApi.Configuration
     {
         public static IServiceCollection AddCoreServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.Configure<JwtConfiguration>(configuration.GetSection(JwtConfiguration.JwtConfigurations));
-            services.AddAutoMapper(typeof(MappingProfile).Assembly);
-
             // START REPOS
             //services.addscoped(typeof(Irepository<>), typeof(repository<>));
             services.AddScoped<IHotelRepository, HotelRepository>();

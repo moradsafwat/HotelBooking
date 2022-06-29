@@ -20,13 +20,13 @@ namespace HotelBooking.WebApi.Controllers
             _hotelsService = hotelsService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllHotel")]
         public IActionResult GetAllHotel()
         {
             return Ok(_hotelsService.GetAll());
         }
 
-        [HttpGet("id")]
+        [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {
             var hotel = _hotelsService.GetById(id);
@@ -36,18 +36,18 @@ namespace HotelBooking.WebApi.Controllers
             return Ok(hotel);
         }
 
-        [HttpPost]
+        [HttpPost("CreateHotel")]
         public IActionResult CreateHotel(HotelDto dto)
         {
             _hotelsService.Add(dto);
             return Ok(dto);
         }
-        [HttpDelete]
+        [HttpDelete("DeleteHotel")]
         public IActionResult DeleteHotel(int id)
         {
             var hotel = _hotelsService.GetById(id);
             if(hotel == null)
-                return NotFound($"Not Found This ID : {id}");
+                return NotFound($"Not Found Hotel ID : {id}");
 
             _hotelsService.Delete(hotel);            
             return Ok(hotel);

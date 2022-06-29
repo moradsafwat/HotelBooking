@@ -15,5 +15,7 @@ namespace HotelBooking.Core.Services
         RoomDto Add(RoomDto roomDto);
         RoomDto Delete(RoomDto roomDto);
         RoomDto Update(RoomDto roomDto);
+        IEnumerable<RoomDto> GetAvaliableRoomsWithinDatesByBranch(int branchId, DateTime from, DateTime to);
+
     }
 }

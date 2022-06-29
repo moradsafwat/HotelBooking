@@ -15,24 +15,23 @@ namespace HotelBooking.Core.Services
         {
             _room = room;
         }
-        
+
         public IEnumerable<Room> GetAll()
         {
             return _room.List();
         }
-        
+
         public IEnumerable<RoomDto> GetRoomsByBranchId(int branchId)
         {
-            var rooms =  _room.GetRoomsByBranchId(branchId).Select(r => new RoomDto
+            var rooms = _room.GetRoomsByBranchId(branchId).Select(r => new RoomDto
             {
-                RoomId = r.Id,
+                Id = r.Id,
                 RoomName = r.RoomName,
                 RoomType = r.RoomType,
                 Price = r.Price,
                 View = r.View,
                 BranchId = r.BranchId,
-                //BranchName = r.Branch.BranchName
-            }); ;  
+            }); ;
 
             if (rooms != null)
                 return rooms;
@@ -45,7 +44,7 @@ namespace HotelBooking.Core.Services
             {
                 var dto = new RoomDto
                 {
-                    RoomId = room.Id,
+                    Id = room.Id,
                     RoomName = room.RoomName,
                     RoomType = room.RoomType,
                     Price = room.Price,
@@ -98,6 +97,27 @@ namespace HotelBooking.Core.Services
             return dto;
         }
 
-        
+        public IEnumerable<RoomDto> GetAvaliableRoomsWithinDatesByBranch(int branchId, DateTime from, DateTime to)
+        {
+            var rooms = _room.GetAvaliableRoomsWithinDatesByBranch(branchId, from, to);
+            if (rooms != null)
+            { 
+                return rooms
+                .Select(x => new RoomDto
+                {
+                    Id = x.Id,
+                    BranchId = x.BranchId,
+                    Price = x.Price,
+                    RoomName = x.RoomName,
+                    RoomType = x.RoomType,
+                    View = x.View,
+                }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+
+        }
     }
 }

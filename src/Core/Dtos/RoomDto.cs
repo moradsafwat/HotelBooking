@@ -8,7 +8,7 @@ namespace HotelBooking.Core.Dtos
 {
     public class RoomDto
     {
-        public int RoomId { get; set; }
+        public int Id { get; set; }
         public string RoomName { get; set; }
         public RoomTypeEnum RoomType { get; set; }
         public string View { get; set; }

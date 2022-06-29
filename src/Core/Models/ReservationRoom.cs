@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Core.Models
 {
-    public class Room_Reservation
+    public class ReservationRoom
     {
         public int Id { get; set; }
 

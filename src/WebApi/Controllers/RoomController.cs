@@ -48,7 +48,16 @@ namespace HotelBooking.WebApi.Controllers
 
             return NotFound($"Not Found This ID : {branchId}");
         }
-        [HttpPost]
+        [HttpGet("GetAvaliableRoomsWithinDatesByBranch")]
+        public IActionResult GetAvaliableRoomsWithinDatesByBranch(int branchId, DateTime from, DateTime to)
+        {
+            var rooms = _roomsService.GetAvaliableRoomsWithinDatesByBranch(branchId, from, to);
+            if (rooms != null)
+                return Ok(rooms);
+
+            return NotFound($"Not Found Room ID : {branchId}");
+        }
+        [HttpPost("CreateRoom")]
         public IActionResult CreateRoom(RoomDto dto)
         {
             var room = new Room
@@ -66,12 +75,12 @@ namespace HotelBooking.WebApi.Controllers
             _roomsService.Add(dto);
             return Ok(dto);
         }
-        [HttpDelete]
+        [HttpDelete("DeleteRoom")]
         public IActionResult DeleteRoom(int id)
         {
             var room = _roomsService.GetById(id);
             if (room == null)
-                return NotFound($"Not Found This ID : {id}");
+                return NotFound($"Not Found Room ID : {id}");
 
             _roomsService.Delete(room);
             return Ok(room);

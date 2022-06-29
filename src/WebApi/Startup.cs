@@ -13,7 +13,6 @@ using Microsoft.OpenApi.Models;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using HotelBooking.WebApi.Configuration;
-using HotelBooking.WebApi.Exceptions;
 using System.IO;
 
 namespace HotelBooking.WebApi
@@ -46,25 +45,6 @@ namespace HotelBooking.WebApi
                                         .AllowAnyHeader();
                               });
             });
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(options =>
-            //    {
-            //        RSA rsa = RSA.Create();
-            //        string publicKey = File.ReadAllText(Configuration["JwtConfigurations:PublicKeyFilePath"]);
-            //        rsa.FromXmlString(publicKey);
-            //        options.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuerSigningKey = true,
-            //            IssuerSigningKey = new RsaSecurityKey(rsa),
-            //            ValidateIssuer = true,
-            //            ValidIssuer = Configuration["JwtConfigurations:Issuer"],
-            //            ValidateAudience = true,
-            //            ValidAudience = Configuration["JwtConfigurations:Audience"],
-            //            RequireExpirationTime = true,
-            //            ValidateLifetime = true
-            //        };
-
-            //    });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
@@ -88,8 +68,6 @@ namespace HotelBooking.WebApi
             app.UseCors(OriginsPolicy);
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

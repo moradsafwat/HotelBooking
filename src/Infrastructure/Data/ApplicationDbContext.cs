@@ -21,10 +21,9 @@ namespace HotelBooking.Infrastructure.Data
             modelBuilder.Ignore<IdentityUserClaim<string>>();
             modelBuilder.Ignore<IdentityUserToken<string>>();
 
-            //base.OnModelCreating(builder);
-            //builder.Entity<Room>()
-            //    .HasMany(room => room.Reservations)
-            //    .WithMany(reservation => reservation.Rooms)
+            modelBuilder.Entity<Reservation>()
+                .HasMany<Room>(s => s.Rooms)
+                .WithMany(c => c.Reservations);
 
         }
         public DbSet<Hotel> Hotels { get; set; }
