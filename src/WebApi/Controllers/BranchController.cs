@@ -73,14 +73,12 @@ namespace HotelBooking.WebApi.Controllers
             if (check == null)
                 return NotFound($"Sorry .. Not Found Hotel With ID : {branchDto.HotelId}");
             
-            branch.Id = branchDto.Id;
-            branch.BranchName = branchDto.BranchName;
-            branch.Location = branchDto.Location;
-            branch.HotelId = branchDto.HotelId;
+            //branch.Id = branchDto.Id;
+            //branch.BranchName = branchDto.BranchName;
+            //branch.Location = branchDto.Location;
+            //branch.HotelId = branchDto.HotelId;
 
-            _branchsService.Update(branchDto);
-            _branchsService.SaveChange();
-            
+            _branchsService.Update(branchDto);            
             return Ok(branchDto);
         }
         [HttpDelete("DeleteBranch")]

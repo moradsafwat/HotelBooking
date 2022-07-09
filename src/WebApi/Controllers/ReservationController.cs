@@ -45,17 +45,16 @@ namespace HotelBooking.WebApi.Controllers
 
             return Ok(reservation);
         }
+        //[HttpPost("CreateReservation")]
+        //public IActionResult CreateReservation([FromBody]ReservationDto dto)
+        //{
+        //    //var check = _reservations.GetById(dto.BranchId);
+        //    if (dto == null)
+        //        return NotFound($"Sorry .. NotFound Reservation To Create");
 
-        [HttpPost("CreateReservation")]
-        public IActionResult CreateReservation([FromBody]ReservationDto dto)
-        {
-            //var check = _reservations.GetById(dto.BranchId);
-            if (dto == null)
-                return NotFound($"Sorry .. NotFound Reservation To Create");
-
-            _reservations.Create(dto);
-            return Ok(dto);
-        }
+        //    _reservations.Create(dto);
+        //    return Ok(dto);
+        //}
         [HttpPost("CreateReservationWithRooms")]
         public IActionResult CreateReservationWithRooms(ReservationDto dto)
         {
@@ -75,6 +74,5 @@ namespace HotelBooking.WebApi.Controllers
             _reservations.Delete(reservation);
             return Ok(reservation);
         }
-
     }   
 }

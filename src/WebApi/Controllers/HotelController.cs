@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace HotelBooking.WebApi.Controllers
 {
@@ -15,8 +16,11 @@ namespace HotelBooking.WebApi.Controllers
     public class HotelController : ControllerBase
     {
         private readonly IHotelsService _hotelsService;
-        public HotelController(IHotelsService hotelsService)
+        //private readonly ILogger  _logger;
+
+        public HotelController(/*ILogger logger,*/  IHotelsService hotelsService)
         {
+            //_logger = logger;
             _hotelsService = hotelsService;
         }
 
@@ -42,6 +46,18 @@ namespace HotelBooking.WebApi.Controllers
             _hotelsService.Add(dto);
             return Ok(dto);
         }
+
+        [HttpPut("UpdateHotel")]
+        public IActionResult UpdateHotel(int id, HotelDto dto)
+        {
+            var hotel = _hotelsService.GetById(id);
+            if (hotel == null)
+                return NotFound($"Sorry ... Not Found Hotel ID : {id}");
+
+            _hotelsService.Update(dto);
+            return Ok();
+        }
+
         [HttpDelete("DeleteHotel")]
         public IActionResult DeleteHotel(int id)
         {

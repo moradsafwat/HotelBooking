@@ -9,7 +9,7 @@ namespace HotelBooking.Core.Services
 {
     public interface IHotelsService
     {
-        IEnumerable<Hotel> GetAll();
+        IEnumerable<HotelDto> GetAll();
         HotelDto GetById(int id);
         HotelDto Add(HotelDto hotelDto);
         HotelDto Delete(HotelDto hotelDto);

@@ -16,9 +16,13 @@ namespace HotelBooking.Core.Services
             _hotel = hotel;
         }
 
-        public IEnumerable<Hotel> GetAll()
+        public IEnumerable<HotelDto> GetAll()
         {
-            return _hotel.List();
+            return _hotel.List().Select(s => new HotelDto 
+            {
+                Id = s.Id,
+                HotelName = s.HotelName
+            });
         }
         public HotelDto GetById(int id)
         {
@@ -27,7 +31,7 @@ namespace HotelBooking.Core.Services
             {
                 var dto = new HotelDto
                 {
-                    HotelId = hotel.Id,
+                    Id = hotel.Id,
                     HotelName = hotel.HotelName
                 };
                 return dto;
@@ -48,6 +52,7 @@ namespace HotelBooking.Core.Services
         {
             var hotel = new Hotel
             {
+                Id = dto.Id,
                 HotelName = dto.HotelName
             };
 
@@ -58,9 +63,9 @@ namespace HotelBooking.Core.Services
         {
             var hotel = new Hotel
             {
+                Id =dto.Id,
                 HotelName = dto.HotelName
             };
-
             _hotel.Remove(hotel);
             return dto;
         }

@@ -15,5 +15,6 @@ namespace HotelBooking.Core.Dtos
         public double Price { get; set; }
         public int BranchId { get; set; }
         public string BranchName { get; set; }
+        public string Location { get; set; }
     }
 }

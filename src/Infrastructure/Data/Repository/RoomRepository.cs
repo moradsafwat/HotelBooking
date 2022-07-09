@@ -26,7 +26,7 @@ namespace HotelBooking.Infrastructure.Data.Repository
                     Id = x.FirstOrDefault().Id,
                     RoomType = x.FirstOrDefault().RoomType,
                     BranchId = x.FirstOrDefault().BranchId,
-                    Price = x.Min(i => i.Price)
+                    Price = x.Min(i => i.Price),
                 })
                 .ToList();
             if (rooms == null)
