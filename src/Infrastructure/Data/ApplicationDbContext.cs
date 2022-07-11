@@ -25,6 +25,7 @@ namespace HotelBooking.Infrastructure.Data
                 .HasMany<Room>(s => s.Rooms)
                 .WithMany(c => c.Reservations);
 
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasKey(p => new { p.UserId, p.RoleId });
         }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Branch> Branchs { get; set; }

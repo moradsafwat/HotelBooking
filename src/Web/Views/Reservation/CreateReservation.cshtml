@@ -1,0 +1,109 @@
+﻿@model HotelBooking.Core.Models.Reservation
+
+@{
+    ViewData["Title"] = "CreateReservation";
+}
+
+<!--================Banner Area =================-->
+<section class="banner_area">
+    <div class="booking_table d_flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <h6>Away from monotonous life</h6>
+                <h2>Relax Your Mind</h2>
+                <p>If you are looking at blank cassettes on the web, you may be very confused at the<br> difference in price. You may see some for as low as $.17 each.</p>
+                <a href="#" class="btn theme_btn button_hover">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <div class="hotel_booking_area position">
+        <div class="container">
+            <form asp-controller="Reservation" asp-action="CreateReservation" method="post">
+                <div class="hotel_booking_table">
+                    <div class="col-md-2">
+                        <h2>Book<br> Your Room</h2>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="boking_table">
+                            <div class="row">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input asp-for="Name" type='text' class="form-control" placeholder="Name" />
+                                                <span asp-validation-for="Name" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input asp-for="Email" class="form-control" placeholder="Email" />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input asp-for="Phone" class="form-control" placeholder="Phone" />
+                                                <span asp-validation-for="Phone" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <select asp-for="NumOfPeople" class="wide">
+                                                <option data-display="NumOfPeople">Number Of People</option>
+                                                <option value="1 Person">1 Person</option>
+                                                <option value="2 People">2 People</option>
+                                                <option value="3 People">3 People</option>
+                                                <option value="4 People">4 People</option>
+                                                <option value="More">More</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <div class="form-group">
+                                            <div class='input-group date'  accesskey="">
+                                                <input asp-for="ArrivalDate" class="form-control" placeholder="Arrival Date" />
+                                                <span asp-validation-for="ArrivalDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input asp-for="ArrivalTime" class="form-control" placeholder="Arrival Time" />
+                                                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class='input-group date' >
+                                                <input asp-for="DepatureDate" class="form-control" placeholder="Depature Date" />
+                                                <span asp-validation-for="DepatureDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input asp-for="DepartureTime" class="form-control" placeholder="Depature Time" />
+                                                <span asp-validation-for="DepartureTime" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="book_tabel_item">
+                                        <input class="book_now_btn button_hover" type="submit" name="Booking" value="Booking" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!--================Banner Area =================-->
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
