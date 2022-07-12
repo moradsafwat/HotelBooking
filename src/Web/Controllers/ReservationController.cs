@@ -24,24 +24,14 @@ namespace HotelBooking.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateReservation(Reservation reserv)
+        public async Task<IActionResult> CreateReservation(ReservationDto reserv)
         {
-            var booking = new ReservationDto
-            {
-                Name = reserv.Name,
-                Email = reserv.Email,
-                Phone = reserv.Phone,
-                ArrivalDate = reserv.ArrivalDate,
-                ArrivalTime = reserv.ArrivalTime,
-                DepatureDate = reserv.DepatureDate,
-                DepartureTime = reserv.DepartureTime,
-                NumOfPeople = reserv.NumOfPeople
-            };
+            
             client.BaseAddress = new Uri(baseUrl);
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage res = await client.PostAsJsonAsync<ReservationDto>("Reservation/CreateReservationWithRooms", booking);
+            HttpResponseMessage res = await client.PostAsJsonAsync<ReservationDto>("Reservation/CreateReservationWithRooms", reserv);
 
             if (res.IsSuccessStatusCode)
             {
@@ -50,7 +40,7 @@ namespace HotelBooking.Web.Controllers
             }
             ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
 
-            return View(booking);
+            return View(reserv);
         }
     }
 }
